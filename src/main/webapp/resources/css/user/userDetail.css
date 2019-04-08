@@ -1,0 +1,28 @@
+.container {
+	background-color: rgba(0, 0, 0, 0.2);
+	padding: 2%;
+	border-radius: .5vw;
+	margin-top: 10%;
+	margin-bottom: 11%
+}
+.form-group {
+	margin-left: 7%;
+	float: left;
+}
+.container label{
+	color:#FFFFFF;
+}
+.container .dropdown-menu{
+	background-color: rgba(0, 0, 0, 0.3);
+	color: #FFFFFF;
+}
+.container .dropdown-menu a{
+	color: #FFFFFF;
+}
+.sel {
+	width: 40%;
+}
+.form-group .fb {
+	margin-left:11vw;
+	width: 100%;
+}

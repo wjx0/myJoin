@@ -1,0 +1,62 @@
+#title {
+	margin: -22% 0% 0% 0%;
+}
+
+#nav {
+	color: #FFFFFF;
+	margin-right: 2%;
+	margin-top: -1%;
+}
+
+#nav a {
+	color: #FFFFFF;
+}
+
+#navbar {
+	color: #FFFFFF;
+	background-color: rgba(0, 0, 0, 0);
+	border-radius: 25%;
+	padding: 2%;
+	margin-left: 3%;
+	margin-right: 3%;
+}
+
+#message {
+	margin-top: -3%;
+	font-size: 1.45vw;
+}
+
+.badge {
+	margin-left: -23%;
+	background-color: rgba(0, 0, 0, 0.2);
+}
+
+#nav .dropdown .dropdown-menu{
+	background-color: rgba(0, 0, 0, 0.3);
+}
+
+#nav #toIndex {
+	font-size: 1.7vw;
+}
+
+#nav #toUser {
+	font-size: 1.7vw;
+}
+
+#nav #toNotice {
+	font-size: 1.7vw;
+}
+
+#bnav {
+	opacity: 0;
+	width: 30%;
+	margin-bottom: 2%;
+	background-color: rgba(0, 0, 0, 0);
+	border: none;
+	margin-left: 94%;
+}
+
+#bnav a {
+	font-size: 1.8vw;
+	color: rgba(0, 0, 0, 0.6);
+}

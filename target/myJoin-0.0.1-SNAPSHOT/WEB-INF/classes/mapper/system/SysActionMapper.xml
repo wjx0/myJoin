@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="myJoin.dao.SysActionDao">
+	<resultMap type="myJoin.domain.system.SysActionLog" id="SysActionLogMap">
+		<id property="id" column="ID" jdbcType="VARCHAR"/>
+		<result property="logType" column="LOG_TYPE" jdbcType="VARCHAR"/>
+		<result property="logName" column="LOG_NAME" jdbcType="VARCHAR"/>
+		<result property="userName" column="USER_NAME" jdbcType="VARCHAR"/>
+		<result property="name" column="NAME" jdbcType="VARCHAR"/>
+		<result property="content" column="CONTENT" jdbcType="VARCHAR"/>
+		<result property="memo" column="MEMO" jdbcType="VARCHAR"/>
+		<result property="ip" column="IP" jdbcType="VARCHAR"/>
+		<result property="actionUrl" column="ACTION_URL" jdbcType="VARCHAR"/>
+		<result property="creator" column="CREATOR" jdbcType="VARCHAR"/>
+		<result property="updator" column="UPDATOR" jdbcType="VARCHAR"/>
+		<result property="createTime" column="CREATE_TIME" jdbcType="TIMESTAMP"/>
+		<result property="updateTime" column="UPDATE_TIME" jdbcType="TIMESTAMP"/>
+	</resultMap>
+	
+	<!-- 基础字段集合 -->
+	<sql id="Base_Column_List">
+		ID,LOG_TYPE,LOG_NAME,USER_NAME,NAME,CONTENT,MEMO,IP,ACTION_URL,CREATOR,UPDATOR,CREATE_TIME,UPDATE_TIME
+	</sql>
+	
+	<insert id="insert" parameterType="myJoin.domain.system.SysActionLog">
+		insert into Sys_Action_Log
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id!=null and id!=''">
+				ID,
+			</if>
+			<if test="logType !=null and logType !=''">
+				LOG_TYPE,
+			</if>
+			<if test="logName !=null and logName !=''">
+				LOG_NAME,
+			</if>
+			<if test="userName !=null and userName !=''">
+				USER_NAME,
+			</if>
+			<if test="name !=null and name !=''">
+				NAME,
+			</if>
+			<if test="content !=null and content !=''">
+				CONTENT,
+			</if>
+			<if test="memo !=null and memo !=''">
+				MEMO,
+			</if>
+			<if test="ip !=null and ip !=''">
+				IP,
+			</if>
+			<if test="actionUrl !=null and actionUrl !=''">
+				ACTION_URL,
+			</if>
+			<if test="creator !=null and creator !=''">
+				CREATOR,
+			</if>
+			<if test="updator !=null and updator !=''">
+				UPDATOR,
+			</if>
+			<if test="createTime !=null and createTime !=''">
+				CREATE_TIME,
+			</if>
+			<if test="updateTime !=null and updateTime !=''">
+				UPDATE_TIME,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id!=null and id!=''">
+				#{id},
+			</if>
+			<if test="logType !=null and logType !=''">
+				#{logType},
+			</if>
+			<if test="logName !=null and logName !=''">
+				#{logName},
+			</if>
+			<if test="userName !=null and userName !=''">
+				#{userName},
+			</if>
+			<if test="name !=null and name !=''">
+				#{name},
+			</if>
+			<if test="content !=null and content !=''">
+				#{content},
+			</if>
+			<if test="memo !=null and memo !=''">
+				#{memo},
+			</if>
+			<if test="ip !=null and ip !=''">
+				#{ip},
+			</if>
+			<if test="actionUrl !=null and actionUrl !=''">
+				#{actionUrl},
+			</if>
+			<if test="creator !=null and creator !=''">
+				#{creator},
+			</if>
+			<if test="updator !=null and updator !=''">
+				#{updator},
+			</if>
+			<if test="createTime !=null and createTime !=''">
+				#{createTime},
+			</if>
+			<if test="updateTime !=null and updateTime !=''">
+				#{updateTime},
+			</if>
+		</trim>
+	</insert>
+</mapper>

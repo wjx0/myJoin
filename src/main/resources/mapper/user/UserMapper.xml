@@ -1,0 +1,434 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="myJoin.dao.user.UserDao">
+	<resultMap type="myJoin.domain.user.User" id="UserMap">
+		<id property="id" column="ID" jdbcType="VARCHAR" />
+		<result property="userName" column="USER_NAME" jdbcType="VARCHAR" />
+		<result property="password" column="PASSWORD" jdbcType="VARCHAR" />
+		<result property="name" column="NAME" jdbcType="VARCHAR" />
+		<result property="mail" column="MAIL" jdbcType="VARCHAR" />
+		<result property="tel" column="TEL" jdbcType="VARCHAR" />
+		<result property="creator" column="CREATOR" jdbcType="VARCHAR" />
+		<result property="updator" column="UPDATOR" jdbcType="VARCHAR" />
+		<result property="createTime" column="CREATE_TIME" jdbcType="TIMESTAMP" />
+		<result property="updateTime" column="UPDATE_TIME" jdbcType="TIMESTAMP" />
+	</resultMap>
+	
+	<!-- 用户展现映射 -->
+	<resultMap type="myJoin.vo.login.UserVo" id="UserVoMap">
+		<id property="id" column="ID" jdbcType="VARCHAR" />
+		<result property="userName" column="USER_NAME" jdbcType="VARCHAR" />
+		<result property="password" column="PASSWORD" jdbcType="VARCHAR" />
+		<result property="name" column="NAME" jdbcType="VARCHAR" />
+		<result property="mail" column="MAIL" jdbcType="VARCHAR" />
+		<result property="tel" column="TEL" jdbcType="VARCHAR" />
+		<result property="roleName" column="ROLE_NAME" jdbcType="VARCHAR" />
+		<result property="creator" column="CREATOR" jdbcType="VARCHAR" />
+		<result property="updator" column="UPDATOR" jdbcType="VARCHAR" />
+		<result property="createTime" column="CREATE_TIME" jdbcType="TIMESTAMP" />
+		<result property="updateTime" column="UPDATE_TIME" jdbcType="TIMESTAMP" />
+	</resultMap>
+	
+	<!-- 用户角色关系映射 -->
+	<resultMap type="myJoin.domain.user.UserRole" id="UserRoleMap">
+		<id property="id" column="ID" jdbcType="VARCHAR" />
+		<result property="userId" column="USER_ID" jdbcType="VARCHAR" />
+		<result property="userName" column="USER_NAME" jdbcType="VARCHAR" />
+		<result property="roleId" column="ROLE_ID" jdbcType="VARCHAR" />
+		<result property="roleName" column="ROLE_NAME" jdbcType="VARCHAR" />
+		<result property="name" column="NAME" jdbcType="VARCHAR" />
+		<result property="creator" column="CREATOR" jdbcType="VARCHAR" />
+		<result property="updator" column="UPDATOR" jdbcType="VARCHAR" />
+		<result property="createTime" column="CREATE_TIME" jdbcType="TIMESTAMP" />
+		<result property="updateTime" column="UPDATE_TIME" jdbcType="TIMESTAMP" />
+	</resultMap>
+	
+	<!-- 基础字段集合 -->
+	<sql id="Base_Column_List">
+		U.ID,U.USER_NAME,U.PASSWORD,U.NAME,U.MAIL,U.TEL,U.CREATOR,U.UPDATOR,U.CREATE_TIME,U.UPDATE_TIME
+	</sql>
+	
+	<!-- 用户角色字段集合 -->
+	<sql id="UserRole_Column_List">
+		ID,USER_ID,USER_NAME,ROLE_ID,ROLE_NAME,NAME,CREATOR,UPDATOR,CREATE_TIME,UPDATE_TIME
+	</sql>
+	
+	<!-- 用户vo字段集合 -->
+	<sql id="UserVo_Column_List">
+		ID,USER_NAME,PASSWORD,NAME,MAIL,TEL,CREATOR,UPDATOR,CREATE_TIME,UPDATE_TIME,ROLE_NAME
+	</sql>
+
+	<!-- 用户表查询条件 -->
+	<sql id="userConditions">
+		<trim prefix="where" prefixOverrides="and">
+			<if test="id !=null ">
+				and U.ID=#{id,jdbcType=VARCHAR}
+			</if>
+			<if test="userName !=null and userName !='' ">
+				and U.USER_NAME=#{userName,jdbcType=VARCHAR}
+			</if>
+			<if test="password !=null and password !='' ">
+				and U.PASSWORD=#{password,jdbcType=VARCHAR}
+			</if>
+			<if test="name !=null and name !='' ">
+				and U.NAME=#{name,jdbcType=VARCHAR}
+			</if>
+			<if test="mail !=null and mail !='' ">
+				and U.MAIL=#{mail,jdbcType=VARCHAR}
+			</if>
+			<if test="tel !=null and tel !='' ">
+				and U.TEL=#{tel,jdbcType=VARCHAR}
+			</if>
+			<if test="creator !=null and creator !='' ">
+				and U.CREATOR=#{creator,jdbcType=VARCHAR}
+			</if>
+			<if test="updator !=null and updator !='' ">
+				and U.UPDATOR=#{updator,jdbcType=VARCHAR}
+			</if>
+			<if test="createTime !=null">
+				and U.CREATE_TIME=#{createTime,jdbcType=TIMESTAMP}
+			</if>
+			<if test="updateTime !=null">
+				and U.UPDATE_TIME=#{updateTime,jdbcType=TIMESTAMP}
+			</if>
+		</trim>
+	</sql>
+	
+	<!-- 用户角色关系表查询条件 -->
+	<sql id="userRoleConditions">
+		<trim prefix="where" prefixOverrides="and">
+			<if test="id !=null ">
+				and ID=#{id,jdbcType=VARCHAR}
+			</if>
+			<if test="userId !=null ">
+				and USER_ID=#{userId,jdbcType=VARCHAR}
+			</if>
+			<if test="roleId !=null ">
+				and ROLE_ID=#{roleId,jdbcType=VARCHAR}
+			</if>
+			<if test="userName !=null and userName !='' ">
+				and USER_NAME=#{userName,jdbcType=VARCHAR}
+			</if>
+			<if test="name !=null and name !='' ">
+				and NAME=#{name,jdbcType=VARCHAR}
+			</if>
+			<if test="roleName !=null and roleName !='' ">
+				and ROLE_NAME=#{roleName,jdbcType=VARCHAR}
+			</if>
+			<if test="creator !=null and creator !='' ">
+				and CREATOR=#{creator,jdbcType=VARCHAR}
+			</if>
+			<if test="updator !=null and updator !='' ">
+				and UPDATOR=#{updator,jdbcType=VARCHAR}
+			</if>
+			<if test="createTime !=null">
+				and CREATE_TIME=#{createTime,jdbcType=TIMESTAMP}
+			</if>
+			<if test="updateTime !=null">
+				and UPDATE_TIME=#{updateTime,jdbcType=TIMESTAMP}
+			</if>
+		</trim>
+	</sql>
+
+	<!-- 查询用户角色 -->
+	<select id="findUserRoleByUser" parameterType="myJoin.domain.user.User"
+		resultMap="UserRoleMap">
+		select
+		<include refid="UserRole_Column_List" />
+		from USER_ROLE
+		<if test="userName!=null and userName!=''">
+			where USER_NAME=#{userName,jdbcType=VARCHAR}
+		</if>
+	</select>
+	
+	<!-- 根据vo查询用户 -->
+	<select id="findByVo" parameterType="myJoin.domain.user.User"
+		resultMap="UserMap">
+		select
+		<include refid="Base_Column_List" />
+		from USERX U
+		<include refid="userConditions" />
+	</select>
+	
+	<!-- 根据用户查询集合 -->
+	<select id="findListByVo" parameterType="myJoin.vo.login.UserVo"
+		resultMap="UserVoMap">
+		select
+		<include refid="UserVo_Column_List"/>
+		from (select
+		<include refid="Base_Column_List" />
+		,R.ROLE_NAME
+		from USERX U LEFT JOIN USER_ROLE R
+		ON R.USER_ID = U.ID
+		<trim prefix="where" prefixOverrides="and">
+			<if test="userName !=null and userName !='' ">
+				and U.USER_NAME=#{userName,jdbcType=VARCHAR}
+			</if>
+			<if test="name !=null and name !='' ">
+				and U.NAME=#{name,jdbcType=VARCHAR}
+			</if>
+			<if test="mail !=null and mail !='' ">
+				and U.MAIL=#{mail,jdbcType=VARCHAR}
+			</if>
+			<if test="tel !=null and tel !='' ">
+				and U.TEL=#{tel,jdbcType=VARCHAR}
+			</if>
+			<if test="roleName !=null and roleName !='' ">
+				and R.ROLE_NAME=#{roleName,jdbcType=VARCHAR}
+			</if>
+		</trim>
+			ORDER BY U.ID DESC)
+	</select>
+	
+	<!-- 根据vo查询集合数量 -->
+	<select id="findListCountByVo" parameterType="myJoin.vo.login.UserVo"
+		resultType="java.lang.Integer">
+		select
+		count(*)
+		from USERX U LEFT JOIN USER_ROLE R
+		ON R.USER_ID = U.ID
+		<trim prefix="where" prefixOverrides="and">
+			<if test="userName !=null and userName !='' ">
+				and U.USER_NAME=#{userName,jdbcType=VARCHAR}
+			</if>
+			<if test="name !=null and name !='' ">
+				and U.NAME=#{name,jdbcType=VARCHAR}
+			</if>
+			<if test="mail !=null and mail !='' ">
+				and U.MAIL=#{mail,jdbcType=VARCHAR}
+			</if>
+			<if test="tel !=null and tel !='' ">
+				and U.TEL=#{tel,jdbcType=VARCHAR}
+			</if>
+			<if test="roleName !=null and roleName !='' ">
+				and R.ROLE_NAME=#{roleName,jdbcType=VARCHAR}
+			</if>
+		</trim>
+	</select>
+	
+	<!-- 新增用户角色关系 -->
+	<insert id="insertUserRole" parameterType="myJoin.domain.user.UserRole">
+		insert into USER_ROLE
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id!=null and id!=''">
+				ID,
+			</if>
+			<if test="userId !=null and id!=''">
+				USER_ID,
+			</if>
+			<if test="roleId !=null and id!=''">
+				ROLE_ID,
+			</if>
+			<if test="userName !=null and userName !=''">
+				USER_NAME,
+			</if>
+			<if test="name !=null and name !=''">
+				NAME,
+			</if>
+			<if test="roleName !=null and roleName !='' ">
+				ROLE_NAME,
+			</if>
+			<if test="creator !=null and creator !=''">
+				CREATOR,
+			</if>
+			<if test="updator !=null and updator !=''">
+				UPDATOR,
+			</if>
+			<if test="createTime !=null">
+				CREATE_TIME,
+			</if>
+			<if test="updateTime !=null">
+				UPDATE_TIME,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id!=null and id!=''">
+				#{id,jdbcType=VARCHAR},
+			</if>
+			<if test="userId!=null and userId!=''">
+				#{userId,jdbcType=VARCHAR},
+			</if>
+			<if test="roleId!=null and roleId!=''">
+				#{roleId,jdbcType=VARCHAR},
+			</if>
+			<if test="userName !=null and userName !=''">
+				#{userName,jdbcType=VARCHAR},
+			</if>
+			<if test="name !=null and name !=''">
+				#{name,jdbcType=VARCHAR},
+			</if>
+			<if test="roleName !=null and roleName !=''">
+				#{roleName,jdbcType=VARCHAR},
+			</if>
+			<if test="creator !=null and creator !=''">
+				#{creator,jdbcType=VARCHAR},
+			</if>
+			<if test="updator !=null and updator !=''">
+				#{updator,jdbcType=VARCHAR},
+			</if>
+			<if test="createTime !=null">
+				#{createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updateTime !=null">
+				#{updateTime,jdbcType=TIMESTAMP},
+			</if>
+		</trim>
+	</insert>
+	
+	<!-- 修改用户角色关系 -->
+	<update id="updateUserRole" parameterType="myJoin.domain.user.UserRole">
+		update USER_ROLE
+		<set>
+			<if test="id!=null and id!=''">
+				ID=#{id,jdbcType=VARCHAR},
+			</if>
+			<if test="userId!=null and userId!=''">
+				USER_ID=#{userId,jdbcType=VARCHAR},
+			</if>
+			<if test="roleId!=null and roleId!=''">
+				ROLE_ID=#{roleId,jdbcType=VARCHAR},
+			</if>
+			<if test="userName !=null and userName!=''">
+				USER_NAME=#{userName,jdbcType=VARCHAR},
+			</if>
+			<if test="name !=null and name!=''">
+				NAME=#{name,jdbcType=VARCHAR},
+			</if>
+			<if test="roleName !=null and roleName!=''">
+				ROLE_NAME=#{roleName,jdbcType=VARCHAR},
+			</if>
+			<if test="creator !=null and creator!=''">
+				CREATOR=#{creator,jdbcType=VARCHAR},
+			</if>
+			<if test="updator !=null and updator!=''">
+				UPDATOR=#{updator,jdbcType=VARCHAR},
+			</if>
+			<if test="createTime !=null">
+				CREATE_TIME=#{createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updateTime !=null">
+				UPDATE_TIME=#{updateTime,jdbcType=TIMESTAMP},
+			</if>
+		</set>
+		where USER_NAME=#{userName,jdbcType=VARCHAR}
+	</update>
+
+	<update id="update" parameterType="myJoin.domain.user.User">
+		update USERX U
+		<set>
+			<if test="userName !=null and userName!=''">
+				U.USER_NAME=#{userName,jdbcType=VARCHAR},
+			</if>
+			<if test="password !=null and password!=''">
+				U.PASSWORD=#{password,jdbcType=VARCHAR},
+			</if>
+			<if test="name !=null and name !=''">
+				U.NAME=#{name,jdbcType=VARCHAR},
+			</if>
+			<if test="mail !=null and mail !=''">
+				U.MAIL=#{mail,jdbcType=VARCHAR},
+			</if>
+			<if test="tel !=null and tel !=''">
+				U.TEL=#{tel,jdbcType=VARCHAR},
+			</if>
+			<if test="creator !=null and creator !=''">
+				U.CREATOR=#{creator,jdbcType=VARCHAR},
+			</if>
+			<if test="updator !=null and updator !=''">
+				U.UPDATOR=#{updator,jdbcType=VARCHAR},
+			</if>
+			<if test="createTime !=null">
+				U.CREATE_TIME=#{createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updateTime !=null">
+				U.UPDATE_TIME=#{updateTime,jdbcType=TIMESTAMP},
+			</if>
+		</set>
+		where U.USER_NAME=#{userName,jdbcType=VARCHAR}
+	</update>
+	
+	<insert id="insert" parameterType="myJoin.domain.user.User">
+		insert into USERX U
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id!=null and id!=''">
+				U.ID,
+			</if>
+			<if test="userName !=null and userName !=''">
+				U.USER_NAME,
+			</if>
+			<if test="password !=null and password !=''">
+				U.PASSWORD,
+			</if>
+			<if test="name !=null and name !=''">
+				U.NAME,
+			</if>
+			<if test="mail !=null and mail !=''">
+				U.MAIL,
+			</if>
+			<if test="tel !=null and tel !=''">
+				U.TEL,
+			</if>
+			<if test="creator !=null and creator !=''">
+				U.CREATOR,
+			</if>
+			<if test="updator !=null and updator !=''">
+				U.UPDATOR,
+			</if>
+			<if test="createTime !=null">
+				U.CREATE_TIME,
+			</if>
+			<if test="updateTime !=null">
+				U.UPDATE_TIME,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id!=null and id!=''">
+				#{id,jdbcType=VARCHAR},
+			</if>
+			<if test="userName !=null and userName !=''">
+				#{userName,jdbcType=VARCHAR},
+			</if>
+			<if test="password !=null and password !=''">
+				#{password,jdbcType=VARCHAR},
+			</if>
+			<if test="name !=null and name !=''">
+				#{name,jdbcType=VARCHAR},
+			</if>
+			<if test="mail !=null and mail !=''">
+				#{mail,jdbcType=VARCHAR},
+			</if>
+			<if test="tel !=null and tel !=''">
+				#{tel,jdbcType=VARCHAR},
+			</if>
+			<if test="creator !=null and creator !=''">
+				#{creator,jdbcType=VARCHAR},
+			</if>
+			<if test="updator !=null and updator !=''">
+				#{updator,jdbcType=VARCHAR},
+			</if>
+			<if test="createTime !=null">
+				#{createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updateTime !=null">
+				#{updateTime,jdbcType=TIMESTAMP},
+			</if>
+		</trim>
+	</insert>
+	
+	<delete id="delete" parameterType="myJoin.domain.user.User">
+		delete from USERX U
+		<include refid="userConditions" />
+	</delete>
+	
+	<select id="findVoByUser" parameterType="myJoin.domain.user.User" resultMap="UserVoMap">
+		select
+		<include refid="UserVo_Column_List"/>
+		from (select
+		<include refid="Base_Column_List" />
+		,R.ROLE_NAME
+		from USERX U LEFT JOIN USER_ROLE R
+		ON R.USER_ID = U.ID 
+		where U.USER_NAME=#{userName,jdbcType=VARCHAR}
+		)
+	</select>
+</mapper>

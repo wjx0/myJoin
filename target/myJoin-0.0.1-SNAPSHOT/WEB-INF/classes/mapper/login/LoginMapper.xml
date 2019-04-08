@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="myJoin.dao.login.LoginDao">
+	<resultMap type="myJoin.domain.login.UserRole" id="UserRoleMap">
+		<id property="id" column="ID" jdbcType="VARCHAR"/>
+		<result property="userId" column="USER_ID" jdbcType="VARCHAR"/>
+		<result property="userName" column="USER_NAME" jdbcType="VARCHAR"/>
+		<result property="roleId" column="ROLE_ID" jdbcType="VARCHAR"/>
+		<result property="roleName" column="ROLE_NAME" jdbcType="VARCHAR"/>
+		<result property="name" column="NAME" jdbcType="VARCHAR"/>
+		<result property="creator" column="CREATOR" jdbcType="VARCHAR"/>
+		<result property="updator" column="UPDATOR" jdbcType="VARCHAR"/>
+		<result property="createTime" column="CREATE_TIME" jdbcType="TIMESTAMP"/>
+		<result property="updateTime" column="UPDATE_TIME" jdbcType="TIMESTAMP"/>
+	</resultMap>
+	
+	<!-- 基础字段集合 -->
+	<sql id="Base_Column_List">
+		ID,USER_ID,USER_NAME,ROLE_ID,ROLE_NAME,NAME,CREATOR,UPDATOR,CREATE_TIME,UPDATE_TIME
+	</sql>
+
+	<select id="findUserRoleByUser" parameterType="myJoin.domain.login.User" resultMap="UserRoleMap">
+		select
+		<include refid="Base_Column_List"/>
+		from USER_ROLE
+		<if test="userName!=null and userName!=''">
+			where USER_NAME=#{userName}
+		</if>
+	</select>
+</mapper>

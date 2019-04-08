@@ -1,0 +1,36 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:jee="http://www.springframework.org/schema/jee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+  http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-2.5.xsd" >
+  
+<!-- <bean autowire="byType" id="ftpUploadLoanData2AbsJob" class="com.zdmoney.credit.job.FtpUploadLoanData2AbsJob"/> -->
+	<!-- 创建调度任务 使用已有的service类方法，不需要单独编写调度类QuartzJob -->
+
+	<!-- 配置调度任务,复杂定制模式,月份中的日期和星期不能同时设置   -->
+	<!--
+		1.秒 0-59 2.分钟 0-59 3.小时 0-23 4.月份中的日期 1-31 5.月份 1-12或者Jan Feb Mar Apr
+		May Jun Jul Aug Sept Oct Nov Dec 6.星期中的日期
+		1-7或者MON,TUE,WED,THU,FRI,SAT,SUN. 7.年
+	-->
+		
+	<!-- 
+	
+	<bean id="ftpUploadLoanData2Abs" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="ftpUploadLoanData2AbsJob"/>
+		</property>
+		<property name="targetMethod">
+			<value>execute</value>
+		</property>
+	</bean>-->
+	<!-- CronTriggerBean -->
+	<!-- 
+	<bean id="ftpUploadLoanData2AbsTriggrt" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail">
+			<ref bean="ftpUploadLoanData2Abs" />
+		</property>
+		<property name="cronExpression">
+			<value>0 45 0 * * ?</value>
+		</property>
+	</bean> -->
+</beans>

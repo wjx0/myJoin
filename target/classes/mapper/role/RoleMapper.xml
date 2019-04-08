@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="myJoin.dao.role.RoleDao">
+	<resultMap type="myJoin.domain.role.Role" id="RoleMap">
+		<id property="id" column="ID" jdbcType="VARCHAR"/>
+		<result property="roleName" column="ROLE_NAME" jdbcType="VARCHAR"/>
+		<result property="creator" column="CREATOR" jdbcType="VARCHAR"/>
+		<result property="updator" column="UPDATOR" jdbcType="VARCHAR"/>
+		<result property="createTime" column="CREATE_TIME" jdbcType="TIMESTAMP"/>
+		<result property="updateTime" column="UPDATE_TIME" jdbcType="TIMESTAMP"/>
+	</resultMap>
+	
+	<!-- 基础字段集合 -->
+	<sql id="Base_Column_List">
+		ID,ROLE_NAME,CREATOR,UPDATOR,CREATE_TIME,UPDATE_TIME
+	</sql>
+	<!-- 角色表查询条件 -->
+	<sql id="roleConditions">
+		<trim prefix="where" prefixOverrides="and">
+			<if test="id !=null ">
+				and ID=#{id,jdbcType=VARCHAR}
+			</if>
+			<if test="roleName !=null and roleName !='' ">
+				and ROLE_NAME=#{roleName}
+			</if>
+			<if test="creator !=null and creator !='' ">
+				and CREATOR=#{creator}
+			</if>
+			<if test="updator !=null and updator !='' ">
+				and UPDATOR=#{updator}
+			</if>
+			<if test="createTime !=null">
+				and CREATE_TIME=#{createTime}
+			</if>
+			<if test="updateTime !=null">
+				and UPDATE_TIME=#{updateTime}
+			</if>
+		</trim>
+	</sql>
+	<!-- 根据vo查询角色 -->
+	<select id="findByVo" parameterType="myJoin.domain.role.Role" resultMap="RoleMap">
+		select
+		<include refid="Base_Column_List"/>
+		from ROLE
+		<include refid="roleConditions"/>
+	</select>
+</mapper>

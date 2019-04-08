@@ -1,0 +1,93 @@
+#foot {
+	box-shadow: 0 -12px 12px #808080;
+	padding: 3% 0% 1% 0%;
+	float: right;
+	background-color: rgba(0, 0, 0, 0);
+	width: 100%;
+}
+
+#l0 {
+	margin-left: 8%;
+}
+
+.l {
+	float: left;
+	width: 15%;
+	margin-right: 3%;
+}
+
+.list {
+	list-style: none;
+	border: none;
+	background-color: rgba(0, 0, 0, 0);
+}
+
+.lTitle {
+	padding-bottom: 3%;
+	font-size: 1.7vw;
+}
+
+.lTitle span {
+	opacity: .9;
+}
+
+.lTitle strong {
+	margin-left: 6%;
+}
+
+.list li {
+	margin: 10% 0% 5% 0%;
+}
+
+.list li span {
+	color: yellow;
+}
+
+.list a {
+	margin-right: 5%;
+	color: #00ff00;
+	text-decoration: none;
+}
+
+.lists {
+	font-size: 1vw;
+}
+
+#l2 {
+	margin-right: 8%;
+}
+
+#l4 {
+	color:#FFFFFF;
+	margin-top: 1%;
+	margin-left: 42%;
+	font-size: 1vw;
+}
+
+#at {
+	margin-left: 15%;
+	color: yellow;
+	font-size: 1.4vw;
+	font-style: italic;
+}
+
+hr {
+	margin-top: 3%;
+}
+
+textarea {
+	width: 20%;
+	font-size: 1.3vw;
+	margin-left: 5%;
+	outline: none;
+	color: yellow;
+	box-shadow: 5px 5px 5px #444 inset;
+	background-color: rgba(255, 255, 255, 0.4);
+	text-decoration: true;
+	border-radius: 5%;
+}
+
+#foot .glyphicon {
+	margin-right: 3%;
+	color: #FFFFFF;
+}

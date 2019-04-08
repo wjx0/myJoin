@@ -1,0 +1,113 @@
+<beans 
+ xmlns="http://www.springframework.org/schema/beans"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xmlns:aop="http://www.springframework.org/schema/aop"
+ xmlns:tx="http://www.springframework.org/schema/tx"
+ xmlns:context="http://www.springframework.org/schema/context"
+ xmlns:mvc="http://www.springframework.org/schema/mvc"
+ xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+ http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd
+ http://www.springframework.org/schema/context
+ http://www.springframework.org/schema/context/spring-context-3.2.xsd 
+ http://www.springframework.org/schema/tx 
+ http://www.springframework.org/schema/tx/spring-tx.xsd 
+ http://www.springframework.org/schema/mvc 
+ http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd">
+ 
+    <aop:aspectj-autoproxy />
+    
+    <!-- 激活spring的注解. -->
+	<context:annotation-config />
+	
+	<!-- 扫描注解组件并且自动的注入spring beans中. 
+	例如,他会扫描@Controller 和@Service下的文件.所以确保此base-package设置正确. -->
+	<context:component-scan base-package="myJoin.*" />
+
+	<!-- 配置注解驱动的Spring MVC Controller 的编程模型.注:次标签只在 Servlet MVC工作! -->
+	<mvc:annotation-driven />
+		<!-- <mvc:message-converters register-defaults="true">
+			<bean class="org.springframework.http.converter.StringHttpMessageConverter">
+				<constructor-arg value="UTF-8" />
+			</bean>
+		</mvc:message-converters>
+	</mvc:annotation-driven> -->
+	<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="order" value="1"></property>
+		<property name="ignoreUnresolvablePlaceholders" value="true"></property>
+        <property name="locations">
+            <list>
+                <value>classpath:jdbc.properties</value>
+                <value>classpath:redis.properties</value>
+            </list>
+        </property>
+	</bean>
+	<!-- 数据源配置 -->
+	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" >
+		<property name="driverClass">
+			<value>${driver}</value>
+		</property>
+		<property name="jdbcUrl">
+			<value>${driverUrl}</value>
+		</property>
+		<property name="user">
+			<value>${username}</value>
+		</property>
+		<property name="password">
+			<value>${password}</value>
+		</property>
+		<property name="maxPoolSize" value="30"/><!-- 最大连接数 -->
+        <property name="maxIdleTime" value="60000"/><!-- 最大等待时间 -->
+        <property name="initialPoolSize" value="4"/>  <!--初始个数 -->
+        <property name="preferredTestQuery"><value>SELECT 1 FROM TABLE</value></property>
+	</bean>
+	<!-- 数据源配置 -->
+	
+	<!-- 配置事务管理器 -->
+	<bean id="transactionManager"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+	
+	<tx:annotation-driven transaction-manager="transactionManager" />
+   
+   <tx:advice id="TestAdvice" transaction-manager="transactionManager">
+	    <tx:attributes>
+	      <tx:method name="find*" propagation="SUPPORTS" read-only="true"/>
+	      <tx:method name="get*" propagation="SUPPORTS" read-only="true"/>
+	      <tx:method name="query*" propagation="SUPPORTS" read-only="true"/>
+	      <tx:method name="*" propagation="REQUIRED"/>
+	    </tx:attributes>
+	</tx:advice>
+	<!-- dao接口实现 -->
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+	    <property name="basePackage" value="myJoin.dao"/>      
+    	<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" />  
+    </bean>
+	<!--  配置参与事务的类 -->
+	<aop:config proxy-target-class="true">
+		<aop:pointcut id="allTestServiceMethod" expression="execution(* myJoin.service.*.*.*(..))"/>
+		<aop:advisor pointcut-ref="allTestServiceMethod" advice-ref="TestAdvice" />
+	</aop:config>
+   
+   <!-- restTemplate工厂配置 -->
+    <bean id="requestFactory" class="org.springframework.http.client.SimpleClientHttpRequestFactory">
+        <property name="readTimeout" value="60000"/>
+        <property name="connectTimeout" value="5000"/>
+    </bean>
+    <!-- restTemplate的配置 -->
+    <bean id="restTemplate" class="org.springframework.web.client.RestTemplate">
+        <constructor-arg ref="requestFactory"/>
+    </bean>
+   <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="configLocation" value="classpath:/mybatis/configuration.xml" />
+		<!-- mapper和resultmap配置路径 -->
+		<property name="mapperLocations">
+			<list>
+				<!-- 表示在mapper包所有目录中，以-Mapper.xml结尾所有文件 -->
+				<value>classpath:/mapper/**/*Mapper.xml</value>
+			</list>
+		</property>
+	</bean>
+   
+</beans>  
