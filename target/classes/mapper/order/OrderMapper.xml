@@ -188,7 +188,7 @@
 				UPDATE_TIME=#{updateTime,jdbcType=TIMESTAMP},
 			</if>
 		</set>
-		<include refid="orderConditions"/>
+		where ID = #{id,jdbcType=VARCHAR}
 	</update>
 
 	<select id="findListByVo" parameterType="myJoin.domain.order.Order" resultMap="OrderMap">
