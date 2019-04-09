@@ -13,9 +13,9 @@ public interface IOrderService{
 	//分页查询用户列表
 	public Pager<Order> findListByPager(Pager<Order> pager);
 	//修改用户信息
-	public void update(Order order);
+	public String update(Order order);
 	//新增用户信息
-	public Order insert(Order order);
+	public String insert(Order order);
 	//删除用户信息
 	public void delete(Order order);
 }

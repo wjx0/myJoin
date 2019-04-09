@@ -62,7 +62,8 @@ $(function() {
 								tableHtml += "<td><a title='修改' class='glyphicon glyphicon-pencil' data-id='" + item.id 
 								+ "' data-quantity='" + item.quantity + "' data-productName='" + item.productName 
 								+ "' onclick='updateData(this);' ></a>&nbsp;&nbsp;&nbsp;&nbsp;" +
-								"<a title='删除' class='glyphicon glyphicon-minus' data-id='" + item.id + "' onclick='deleteData(this);'></a>"
+								"<a title='删除' class='glyphicon glyphicon-minus' data-id='" + item.id + "' data-status='" + item.status +
+								"' onclick='deleteData(this);'></a>"
 								+"</td>"
 							}else{
 								tableHtml += "<td><a data-id='" + item.id + "'  onclick='pass(this);' ><strong>√</strong></a>&nbsp;&nbsp;&nbsp;&nbsp;" +
@@ -177,6 +178,11 @@ $(function() {
 	
 	deleteData = function(e){
 		var id = e.getAttribute("data-id");
+		var status = e.getAttribute("data-status");
+		if(status == '已审批'){
+			alert('订单已审批无法删除！');
+			return false;
+		}
 		var isTrue = confirm("确定删除？");
 		if(!isTrue){
 			return false;

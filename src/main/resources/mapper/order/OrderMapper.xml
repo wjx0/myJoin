@@ -9,7 +9,7 @@
 		<result property="userName" column="USER_NAME" jdbcType="VARCHAR" />
 		<result property="productId" column="PRODUCT_ID" jdbcType="VARCHAR" />
 		<result property="productName" column="PRODUCT_NAME" jdbcType="VARCHAR" />
-		<result property="quantity" column="QUANTITY" jdbcType="VARCHAR" />
+		<result property="quantity" column="QUANTITY" jdbcType="NUMBER" />
 		<result property="name" column="NAME" jdbcType="VARCHAR" />
 		<result property="status" column="STATUS" jdbcType="VARCHAR" />
 		<result property="creator" column="CREATOR" jdbcType="VARCHAR" />
@@ -48,7 +48,7 @@
 				and PRODUCT_NAME=#{productName,jdbcType=VARCHAR}
 			</if>
 			<if test="quantity !=null and quantity !='' ">
-				and QUANTITY=#{quantity,jdbcType=VARCHAR}
+				and QUANTITY=#{quantity,jdbcType=NUMBER}
 			</if>
 			<if test="creator !=null and creator !='' ">
 				and CREATOR=#{creator,jdbcType=VARCHAR}
@@ -129,7 +129,7 @@
 				#{productName,jdbcType=VARCHAR},
 			</if>
 			<if test="quantity !=null and quantity !=''">
-				#{quantity,jdbcType=VARCHAR},
+				#{quantity,jdbcType=NUMBER},
 			</if>
 			<if test="creator !=null and creator !=''">
 				#{creator,jdbcType=VARCHAR},
@@ -173,7 +173,7 @@
 				PRODUCT_NAME=#{productName,jdbcType=VARCHAR},
 			</if>
 			<if test="quantity !=null and quantity''">
-				QUANTITY=#{quantity,jdbcType=VARCHAR},
+				QUANTITY=#{quantity,jdbcType=NUMBER},
 			</if>
 			<if test="creator !=null and creator!=''">
 				CREATOR=#{creator,jdbcType=VARCHAR},

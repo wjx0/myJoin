@@ -18,7 +18,7 @@ public class Order extends BaseDomain{
 	
 	private String productName;
 	
-	private String quantity;
+	private int quantity;
 	
 	private String name;
 
@@ -80,11 +80,11 @@ public class Order extends BaseDomain{
 		this.status = status;
 	}
 
-	public String getQuantity() {
+	public int getQuantity() {
 		return quantity;
 	}
 
-	public void setQuantity(String quantity) {
+	public void setQuantity(int quantity) {
 		this.quantity = quantity;
 	}
 

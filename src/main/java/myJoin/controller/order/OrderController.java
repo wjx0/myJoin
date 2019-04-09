@@ -76,13 +76,13 @@ public class OrderController extends BaseController {
 		createLog(request, SysActionTypeEnum.新增, "新增订单", "新增订单信息");
 		ResponseInfo<Object> responseInfo = null;
 		try{
-			Order _order = orderServiceImpl.insert(order);
-			if(_order==null){
+			String msg = orderServiceImpl.insert(order);
+			if(msg.equals("")){
 				responseInfo = new ResponseInfo<Object>(ResponseEnum.SYS_SUCCESS.getCode(),
 						"新增成功",SysActionTypeEnum.新增.getCode());
 			}else{
 				responseInfo = new ResponseInfo<Object>(ResponseEnum.SYS_SUCCESS.getCode(),
-						"订单名已存在",SysActionTypeEnum.新增.getCode());
+						msg,SysActionTypeEnum.新增.getCode());
 			}
 		}catch(Exception e){
 			//系统忙
@@ -112,7 +112,6 @@ public class OrderController extends BaseController {
 		return toResponseJSON(responseInfo);
 	}
 	
-	//删除订单
 		@RequestMapping("/pass/{id}")
 		@ResponseBody
 		public String pass(HttpServletRequest request,HttpServletResponse response,@PathVariable String id){
@@ -122,9 +121,15 @@ public class OrderController extends BaseController {
 				Order order = new Order();
 				order.setId(id);
 				order.setStatus("通过");
-				orderServiceImpl.update(order);
-				responseInfo = new ResponseInfo<Object>(ResponseEnum.SYS_SUCCESS.getCode(),
-						"通过成功",SysActionTypeEnum.通过.getCode());
+				String msg = orderServiceImpl.update(order);
+				if(msg.equals("")) {
+					responseInfo = new ResponseInfo<Object>(ResponseEnum.SYS_SUCCESS.getCode(),
+							"通过成功",SysActionTypeEnum.通过.getCode());
+				}else {
+					responseInfo = new ResponseInfo<Object>(ResponseEnum.SYS_FAILD.getCode(),
+							msg,SysActionTypeEnum.通过.getCode());
+				}
+
 			}catch(Exception e){
 				//系统忙
 				responseInfo = new ResponseInfo<Object>(ResponseEnum.SYS_FAILD.getCode(),

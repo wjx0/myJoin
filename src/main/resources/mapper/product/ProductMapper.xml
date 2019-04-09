@@ -5,7 +5,7 @@
 		<id property="id" column="ID" jdbcType="VARCHAR"/>
 		<result property="name" column="NAME" jdbcType="VARCHAR"/>
 		<result property="description" column="DESCRIPTION" jdbcType="VARCHAR"/>
-		<result property="quantity" column="QUANTITY" jdbcType="VARCHAR"/>
+		<result property="quantity" column="QUANTITY" jdbcType="NUMBER"/>
 		<result property="creator" column="CREATOR" jdbcType="VARCHAR"/>
 		<result property="updator" column="UPDATOR" jdbcType="VARCHAR"/>
 		<result property="createTime" column="CREATE_TIME" jdbcType="TIMESTAMP"/>
@@ -29,7 +29,7 @@
 				and DESCRIPTION=#{description,jdbcType=VARCHAR}
 			</if>
 			<if test="quantity !=null and quantity !=''">
-				and QUANTITY=#{quantity,jdbcType=VARCHAR}
+				and QUANTITY=#{quantity,jdbcType=NUMBER}
 			</if>
 			<if test="creator !=null and creator !=''">
 				and CREATOR=#{creator,jdbcType=VARCHAR}
@@ -127,7 +127,7 @@
 				DESCRIPTION=#{description,jdbcType=VARCHAR}
 			</if>
 			<if test="quantity !=null">
-				QUANTITY=#{quantity,jdbcType=VARCHAR}
+				QUANTITY=#{quantity,jdbcType=NUMBER}
 			</if>
 			<if test="creator !=null">
 				CREATOR=#{creator,jdbcType=VARCHAR}
