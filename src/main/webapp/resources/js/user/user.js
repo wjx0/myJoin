@@ -1,23 +1,6 @@
 $(function() {
 	var dataList;
 	
-	window.onload = function() {
-		$.ajax({
-			url : contextPath + "/system/message/findListCount",
-			dataType : 'json',
-			type : 'post',
-			success : function(data, textStatus, jqXHR) {
-				var count = data.t;
-				if (count != null) {
-					$('#mc').text(count);
-				}
-			},
-			error : function(XMLHttpRequest, textStatus, errorThrown, d) {
-				alert(textStatus + '  :  ' + errorThrown + '!');
-			}
-		});
-	};
-	
 	$('#find').click(function() {
 		findUserList();
 	});
@@ -93,7 +76,7 @@ $(function() {
 										+ "' data-userName='" + item.userName + "' data-name='" + item.name 
 										+ "' data-mail='" + item.mail + "' data-tel='" + item.tel + "' data-roleName='" 
 										+ item.roleName + "' onclick='updateData(this);' ></a>&nbsp;&nbsp;&nbsp;&nbsp;" +
-									"<a title='删除' class='glyphicon glyphicon-minus' data-id='" + item.id + "' onclick='deleteData(this);'</a>"
+									"<a title='删除' class='glyphicon glyphicon-minus' data-id='" + item.id + "' onclick='deleteData(this);'></a>"
 							+"</td>"
 						+ "</tr>"
 						$("table").append(tableHtml);

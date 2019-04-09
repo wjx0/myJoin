@@ -27,13 +27,15 @@
 
 		<ul class="nav navbar-nav navbar-right" id="nav">
 			<li><a id="toIndex" class="navT" href="<%=contextPath%>/views/index.jsp"><strong>首页</strong></a></li>
+			<li><a id="toProduct" class="navT" href="<%=contextPath%>/views/product/product.jsp"><strong>产品管理</strong></a></li>
+			<li><a id="toOrder" class="navT" href="<%=contextPath%>/views/order/order.jsp"><strong>订单管理</strong></a></li>
+			<li><a id="toShop" class="navT" href="<%=contextPath%>/views/shop/shop.jsp"><strong>商铺管理</strong></a></li>
+			<c:if test="${SPRING_SECURITY_CONTEXT.authentication.principal.userRole.roleName == 'ROLE_ADMIN'}">
 			<li><a id="toUser" class="navT" href="<%=contextPath%>/views/user/user.jsp"><strong>用户管理</strong></a></li>
-			<li><a id="toNotice" class="navT" href="<%=contextPath%>/views/system/notice.jsp"><strong>商铺管理</strong></a></li>
+			<li><a id="toNotice" class="navT" href="<%=contextPath%>/views/system/notice.jsp"><strong>公告管理</strong></a></li>
+			<li><a id="toAdvice" class="navT" href="<%=contextPath%>/views/system/advice.jsp"><strong>建议管理</strong></a></li>
+			</c:if>
 			<li><a id="shu" href="javascript:void(0)"><strong>丨</strong></a></li>
-			<li><a id="message" class="navT" href="<%=contextPath%>/views/system/message.jsp">
-					<span class="glyphicon glyphicon-envelope"></span> <span id="mc"
-					class="badge"></span>
-			</a></li>
 			<li class="dropdown"><a id="userName" class="navT"
 				href="javascript:void(0)" class="dropdown-toggle"
 				data-toggle="dropdown"> <strong>${SPRING_SECURITY_CONTEXT.authentication.principal.userRole.userName}</strong>

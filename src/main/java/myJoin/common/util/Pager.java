@@ -20,6 +20,8 @@ public class Pager<T> implements Serializable{
 	public final static String DIRECTION_DESC = "DESC";
 	public final static String DIRECTION_ASC = "ASC";
 
+	private String roleName;
+	
 	/** 当前页，真实页数，取值：1、2、3.... */
 	private int page = 1;
 
@@ -135,6 +137,14 @@ public class Pager<T> implements Serializable{
 
 	public void setTotalPage(long totalPage) {
 		this.totalPage = totalPage;
+	}
+
+	public String getRoleName() {
+		return roleName;
+	}
+
+	public void setRoleName(String roleName) {
+		this.roleName = roleName;
 	}
 
 	

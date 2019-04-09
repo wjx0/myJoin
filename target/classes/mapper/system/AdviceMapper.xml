@@ -114,7 +114,7 @@
 				CONTENT=#{content,jdbcType=VARCHAR}
 			</if>
 			<if test="state !=null">
-				and STATE=#{state,jdbcType=VARCHAR}
+				STATE=#{state,jdbcType=VARCHAR}
 			</if>
 			<if test="creator !=null">
 				CREATOR=#{creator,jdbcType=VARCHAR}

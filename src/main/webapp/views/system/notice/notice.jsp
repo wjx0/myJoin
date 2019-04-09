@@ -5,13 +5,13 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>商铺加盟管理系统-商铺管理</title>
+<title>商铺加盟管理系统-公告管理</title>
 <%@ include file="/views/common/headIncludeFile.jsp"%>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet"
-	href="<%=contextPath%>/resources/css/user/user.css">
+	href="<%=contextPath%>/resources/css/system/notice/notice.css">
 <script type="text/javascript" charset="UTF-8"
-	src="<%=contextPath%>/resources/js/notice/notice.js"></script>
+	src="<%=contextPath%>/resources/js/system/notice/notice.js"></script>
 </head>
 
 <style>
@@ -31,14 +31,9 @@ body {
 	<div id="container1" class="container">
 		<form id="form" role="form">
 			<div class="form-group sel">
-				<label for="title">商铺名：</label> <input type="text"
+				<label for="title">标题：</label> <input type="text"
 					name="title" class="form-control" id="title"
 					placeholder="title">
-			</div>
-			<div class="form-group sel">
-				<label for="content">描&nbsp;&nbsp;&nbsp;&nbsp;述：</label> <input
-					ype="text"  name="content" class="form-control" id="content"
-					placeholder="content">
 			</div>
 			
 			<input type="hidden" name="page" class="form-control" id="page"
@@ -66,8 +61,9 @@ body {
 		<table class="table table-striped table-hover table-responsive">
 			<tr>
 				<th>#</th>
-				<th>商 铺 名</th>
+				<th>标&nbsp;&nbsp;&nbsp;&nbsp;题</th>
 				<th>描&nbsp;&nbsp;&nbsp;&nbsp;述</th>
+				<th>操&nbsp;&nbsp;&nbsp;&nbsp;作</th>
 			</tr>
 		</table>
 	</div>
@@ -80,12 +76,12 @@ body {
 					<button type="button" class="close" data-dismiss="modal">
 						<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
 					</button>
-					<h4 class="modal-title" id="myModalLabel">新增商铺</h4>
+					<h4 class="modal-title" id="myModalLabel">新增公告</h4>
 				</div>
 				<div class="modal-body">
 					<form id="insertForm" role="form">
 						<div class="form-group sel">
-							<label for="title">商铺名：<span id="validtitleMsg"></span></label> <input type="text"
+							<label for="title">标&nbsp;&nbsp;&nbsp;&nbsp;题：<span id="validtitleMsg"></span></label> <input type="text"
 								name="title" class="form-control" id="title"
 								placeholder="title">
 						</div>
@@ -120,12 +116,13 @@ body {
 					<button type="button" class="close" data-dismiss="modal">
 						<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
 					</button>
-					<h4 class="modal-title" id="myModalLabel">修改商铺</h4>
+					<h4 class="modal-title" id="myModalLabel">修改公告</h4>
 				</div>
 				<div class="modal-body">
 					<form id="updateForm" role="form">
+					<input type="hidden" name="id" id="id">
 						<div class="form-group sel">
-							<label for="title">商铺名：</label><input type="text"
+							<label for="title">标&nbsp;&nbsp;&nbsp;&nbsp;题：</label><input type="text"
 								name="title" class="form-control" id="title" readonly="readonly"
 								placeholder="title">
 						</div>

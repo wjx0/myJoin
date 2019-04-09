@@ -129,6 +129,7 @@
 			</if>
 		</trim>
 	</sql>
+	
 
 	<!-- 查询用户角色 -->
 	<select id="findUserRoleByUser" parameterType="myJoin.domain.user.User"
@@ -140,6 +141,7 @@
 			where USER_NAME=#{userName,jdbcType=VARCHAR}
 		</if>
 	</select>
+	
 	
 	<!-- 根据vo查询用户 -->
 	<select id="findByVo" parameterType="myJoin.domain.user.User"
@@ -213,10 +215,10 @@
 			<if test="id!=null and id!=''">
 				ID,
 			</if>
-			<if test="userId !=null and id!=''">
+			<if test="userId !=null and userId!=''">
 				USER_ID,
 			</if>
-			<if test="roleId !=null and id!=''">
+			<if test="roleId !=null and roleId!=''">
 				ROLE_ID,
 			</if>
 			<if test="userName !=null and userName !=''">
@@ -275,6 +277,7 @@
 		</trim>
 	</insert>
 	
+	
 	<!-- 修改用户角色关系 -->
 	<update id="updateUserRole" parameterType="myJoin.domain.user.UserRole">
 		update USER_ROLE
@@ -312,6 +315,7 @@
 		</set>
 		where USER_NAME=#{userName,jdbcType=VARCHAR}
 	</update>
+	
 
 	<update id="update" parameterType="myJoin.domain.user.User">
 		update USERX U
@@ -418,6 +422,12 @@
 	<delete id="delete" parameterType="myJoin.domain.user.User">
 		delete from USERX U
 		<include refid="userConditions" />
+	</delete>
+	
+	<!-- 删除用户角色关系 -->
+	<delete id="deleteUserRole" parameterType="myJoin.domain.user.User">
+		delete from USER_ROLE 
+		<include refid="userRoleConditions" />
 	</delete>
 	
 	<select id="findVoByUser" parameterType="myJoin.domain.user.User" resultMap="UserVoMap">

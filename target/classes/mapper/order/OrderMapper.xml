@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="myJoin.dao.order.OrderDao">
+	
+	<!-- 用户角色产品映射 -->
+	<resultMap type="myJoin.domain.order.Order" id="OrderMap">
+		<id property="id" column="ID" jdbcType="VARCHAR" />
+		<result property="userId" column="USER_ID" jdbcType="VARCHAR" />
+		<result property="userName" column="USER_NAME" jdbcType="VARCHAR" />
+		<result property="productId" column="PRODUCT_ID" jdbcType="VARCHAR" />
+		<result property="productName" column="PRODUCT_NAME" jdbcType="VARCHAR" />
+		<result property="quantity" column="QUANTITY" jdbcType="VARCHAR" />
+		<result property="name" column="NAME" jdbcType="VARCHAR" />
+		<result property="status" column="STATUS" jdbcType="VARCHAR" />
+		<result property="creator" column="CREATOR" jdbcType="VARCHAR" />
+		<result property="updator" column="UPDATOR" jdbcType="VARCHAR" />
+		<result property="createTime" column="CREATE_TIME" jdbcType="TIMESTAMP" />
+		<result property="updateTime" column="UPDATE_TIME" jdbcType="TIMESTAMP" />
+	</resultMap>
+	
+	<!-- 订单字段集合 -->
+	<sql id="Base_Column_List">
+		ID,USER_ID,USER_NAME,PRODUCT_ID,PRODUCT_NAME,QUANTITY,NAME,STATUS,CREATOR,UPDATOR,CREATE_TIME,UPDATE_TIME
+	</sql>
+	
+	<!-- 订单关系表查询条件 -->
+	<sql id="orderConditions">
+		<trim prefix="where" prefixOverrides="and">
+			<if test="id !=null ">
+				and ID=#{id,jdbcType=VARCHAR}
+			</if>
+			<if test="orderId !=null ">
+				and USER_ID=#{orderId,jdbcType=VARCHAR}
+			</if>
+			<if test="roleId !=null ">
+				and PRODUCT_ID=#{productId,jdbcType=VARCHAR}
+			</if>
+			<if test="orderName !=null and orderName !='' ">
+				and USER_NAME=#{orderName,jdbcType=VARCHAR}
+			</if>
+			<if test="name !=null and name !='' ">
+				and NAME=#{name,jdbcType=VARCHAR}
+			</if>
+			<if test="status !=null and status !='' ">
+				and STATUS=#{status,jdbcType=VARCHAR}
+			</if>
+			<if test="productName !=null and productName !='' ">
+				and PRODUCT_NAME=#{productName,jdbcType=VARCHAR}
+			</if>
+			<if test="quantity !=null and quantity !='' ">
+				and QUANTITY=#{quantity,jdbcType=VARCHAR}
+			</if>
+			<if test="creator !=null and creator !='' ">
+				and CREATOR=#{creator,jdbcType=VARCHAR}
+			</if>
+			<if test="updator !=null and updator !='' ">
+				and UPDATOR=#{updator,jdbcType=VARCHAR}
+			</if>
+			<if test="createTime !=null">
+				and CREATE_TIME=#{createTime,jdbcType=TIMESTAMP}
+			</if>
+			<if test="updateTime !=null">
+				and UPDATE_TIME=#{updateTime,jdbcType=TIMESTAMP}
+			</if>
+		</trim>
+	</sql>
+
+	<!-- 新增订单 -->
+	<insert id="insert" parameterType="myJoin.domain.order.Order">
+		insert into ORDERX
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id!=null and id!=''">
+				ID,
+			</if>
+			<if test="orderId !=null and orderId!=''">
+				USER_ID,
+			</if>
+			<if test="productId !=null and productid!=''">
+				PRODUCT_ID,
+			</if>
+			<if test="orderName !=null and orderName !=''">
+				USER_NAME,
+			</if>
+			<if test="name !=null and name !=''">
+				NAME,
+			</if>
+			<if test="status !=null and status !=''">
+				STATUS,
+			</if>
+			<if test="productName !=null and productName !='' ">
+				PRODUCT_NAME,
+			</if>
+			<if test="quantity !=null and quantity !='' ">
+				QUANTITY,
+			</if>
+			<if test="creator !=null and creator !=''">
+				CREATOR,
+			</if>
+			<if test="updator !=null and updator !=''">
+				UPDATOR,
+			</if>
+			<if test="createTime !=null">
+				CREATE_TIME,
+			</if>
+			<if test="updateTime !=null">
+				UPDATE_TIME,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id!=null and id!=''">
+				#{id,jdbcType=VARCHAR},
+			</if>
+			<if test="orderId!=null and orderId!=''">
+				#{orderId,jdbcType=VARCHAR},
+			</if>
+			<if test="productId!=null and productId!=''">
+				#{productId,jdbcType=VARCHAR},
+			</if>
+			<if test="orderName !=null and orderName !=''">
+				#{orderName,jdbcType=VARCHAR},
+			</if>
+			<if test="name !=null and name !=''">
+				#{name,jdbcType=VARCHAR},
+			</if>
+			<if test="status !=null and status !=''">
+				#{status,jdbcType=VARCHAR},
+			</if>
+			<if test="productName !=null and productName !=''">
+				#{productName,jdbcType=VARCHAR},
+			</if>
+			<if test="quantity !=null and quantity !=''">
+				#{quantity,jdbcType=VARCHAR},
+			</if>
+			<if test="creator !=null and creator !=''">
+				#{creator,jdbcType=VARCHAR},
+			</if>
+			<if test="updator !=null and updator !=''">
+				#{updator,jdbcType=VARCHAR},
+			</if>
+			<if test="createTime !=null">
+				#{createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updateTime !=null">
+				#{updateTime,jdbcType=TIMESTAMP},
+			</if>
+		</trim>
+	</insert>
+	
+	
+	<!-- 修改订单关系 -->
+	<update id="update" parameterType="myJoin.domain.order.Order">
+		update ORDERX
+		<set>
+			<if test="id!=null and id!=''">
+				ID=#{id,jdbcType=VARCHAR},
+			</if>
+			<if test="orderId!=null and orderId!=''">
+				USER_ID=#{orderId,jdbcType=VARCHAR},
+			</if>
+			<if test="productId!=null and productId!=''">
+				PRODUCT_ID=#{productId,jdbcType=VARCHAR},
+			</if>
+			<if test="orderName !=null and orderName!=''">
+				USER_NAME=#{orderName,jdbcType=VARCHAR},
+			</if>
+			<if test="name !=null and name!=''">
+				NAME=#{name,jdbcType=VARCHAR},
+			</if>
+			<if test="status !=null and status!=''">
+				STATUS=#{status,jdbcType=VARCHAR},
+			</if>
+			<if test="productName !=null and productName!=''">
+				PRODUCT_NAME=#{productName,jdbcType=VARCHAR},
+			</if>
+			<if test="quantity !=null and quantity''">
+				QUANTITY=#{quantity,jdbcType=VARCHAR},
+			</if>
+			<if test="creator !=null and creator!=''">
+				CREATOR=#{creator,jdbcType=VARCHAR},
+			</if>
+			<if test="updator !=null and updator!=''">
+				UPDATOR=#{updator,jdbcType=VARCHAR},
+			</if>
+			<if test="createTime !=null">
+				CREATE_TIME=#{createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updateTime !=null">
+				UPDATE_TIME=#{updateTime,jdbcType=TIMESTAMP},
+			</if>
+		</set>
+		<include refid="orderConditions"/>
+	</update>
+
+	<select id="findListByVo" parameterType="myJoin.domain.order.Order" resultMap="OrderMap">
+		select <include refid="Base_Column_List"/> from ORDERX
+		<include refid="orderConditions"/>
+	</select>
+	
+	<!-- 删除订单 -->
+	<delete id="delete" parameterType="myJoin.domain.order.Order">
+		delete from ORDERX
+		<include refid="orderConditions" />
+	</delete>
+	
+</mapper>

@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="myJoin.dao.product.ProductDao">
+	<resultMap type="myJoin.domain.product.Product" id="ProductMap">
+		<id property="id" column="ID" jdbcType="VARCHAR"/>
+		<result property="name" column="NAME" jdbcType="VARCHAR"/>
+		<result property="description" column="DESCRIPTION" jdbcType="VARCHAR"/>
+		<result property="quantity" column="QUANTITY" jdbcType="VARCHAR"/>
+		<result property="creator" column="CREATOR" jdbcType="VARCHAR"/>
+		<result property="updator" column="UPDATOR" jdbcType="VARCHAR"/>
+		<result property="createTime" column="CREATE_TIME" jdbcType="TIMESTAMP"/>
+		<result property="updateTime" column="UPDATE_TIME" jdbcType="TIMESTAMP"/>
+	</resultMap>
+	
+	<!-- 基础字段集合 -->
+	<sql id="Base_Column_List">
+		ID,NAME,DESCRIPTION,QUANTITY,CREATOR,UPDATOR,CREATE_TIME,UPDATE_TIME
+	</sql>
+	<!-- 信息表查询条件 -->
+	<sql id="productConditions">
+		<trim prefix="where (" suffix=")" prefixOverrides="and">
+			<if test="id !=null and id !=''">
+				and ID=#{id,jdbcType=VARCHAR}
+			</if>
+			<if test="name !=null and name !=''">
+				and NAME=#{name,jdbcType=VARCHAR}
+			</if>
+			<if test="description !=null and description !=''">
+				and DESCRIPTION=#{description,jdbcType=VARCHAR}
+			</if>
+			<if test="quantity !=null and quantity !=''">
+				and QUANTITY=#{quantity,jdbcType=VARCHAR}
+			</if>
+			<if test="creator !=null and creator !=''">
+				and CREATOR=#{creator,jdbcType=VARCHAR}
+			</if>
+			<if test="updator !=null and updator !=''">
+				and UPDATOR=#{updator,jdbcType=VARCHAR}
+			</if>
+			<if test="createTime !=null">
+				and CREATE_TIME=#{createTime,jdbcType=TIMESTAMP}
+			</if>
+			<if test="updateTime !=null">
+				and UPDATE_TIME=#{updateTime,jdbcType=TIMESTAMP}
+			</if>
+		</trim>
+	</sql>
+	<insert id="insert" parameterType="myJoin.domain.product.Product">
+		insert into PRODUCT
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id!=null and id!=''">
+				ID,
+			</if>
+			<if test="name !=null and name !=''">
+				NAME,
+			</if>
+			<if test="description !=null and description !=''">
+				DESCRIPTION,
+			</if>
+			<if test="quantity !=null and quantity !=''">
+				QUANTITY,
+			</if>
+			<if test="creator !=null and creator !=''">
+				CREATOR,
+			</if>
+			<if test="updator !=null and updator !=''">
+				UPDATOR,
+			</if>
+			<if test="createTime !=null">
+				CREATE_TIME,
+			</if>
+			<if test="updateTime !=null">
+				UPDATE_TIME,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id!=null and id!=''">
+				#{id},
+			</if>
+			<if test="name !=null and name !=''">
+				#{name},
+			</if>
+			<if test="description !=null and description !=''">
+				#{description},
+			</if>
+			<if test="quantity !=null and quantity !=''">
+				#{quantity},
+			</if>
+			<if test="creator !=null and creator !=''">
+				#{creator},
+			</if>
+			<if test="updator !=null and updator !=''">
+				#{updator},
+			</if>
+			<if test="createTime !=null">
+				#{createTime},
+			</if>
+			<if test="updateTime !=null">
+				#{updateTime},
+			</if>
+		</trim>
+	</insert>
+	<select id="findByVo" parameterType="myJoin.domain.product.Product" resultMap="ProductMap">
+		select <include refid="Base_Column_List"/> from PRODUCT
+		<include refid="productConditions"/>
+	</select>
+	<select id="findListByVo" parameterType="myJoin.domain.product.Product" resultMap="ProductMap">
+		select <include refid="Base_Column_List"/> from PRODUCT
+		<include refid="productConditions"/>
+	</select>
+	<select id="findListCountByVo" parameterType="myJoin.domain.product.Product" resultType="java.lang.Integer">
+		select
+		count(*)
+		from PRODUCT
+		<include refid="productConditions"/>
+	</select>
+	<delete id="delete" parameterType="java.lang.String">
+		delete from PRODUCT WHERE ID=#{id,jdbcType=VARCHAR}
+	</delete>
+	<update id="update" parameterType="myJoin.domain.product.Product">
+		update PRODUCT
+		<set>
+			<if test="name !=null ">
+				NAME=#{name,jdbcType=VARCHAR}
+			</if>
+			<if test="description !=null ">
+				DESCRIPTION=#{description,jdbcType=VARCHAR}
+			</if>
+			<if test="quantity !=null">
+				QUANTITY=#{quantity,jdbcType=VARCHAR}
+			</if>
+			<if test="creator !=null">
+				CREATOR=#{creator,jdbcType=VARCHAR}
+			</if>
+			<if test="updator !=null">
+				UPDATOR=#{updator,jdbcType=VARCHAR}
+			</if>
+			<if test="createTime !=null">
+				CREATE_TIME=#{createTime,jdbcType=TIMESTAMP}
+			</if>
+			<if test="updateTime !=null">
+				UPDATE_TIME=#{updateTime,jdbcType=TIMESTAMP}
+			</if>
+		</set>
+		where ID = #{id,jdbcType=VARCHAR}
+	</update>
+</mapper>

@@ -60,9 +60,6 @@ body {
 						</button>
 						<ul class="dropdown-menu">
 							<li><a href="#">ROLE_FRANCHISEE</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(加盟商)</li>
-							<li><a href="#">ROLE_AGENT</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(代理商)</li>
-							<li><a href="#">ROLE_FRANCHISEMANAGER</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(加盟管理员)</li>
-							<li><a href="#">ROLE_SYSTEMMANAGER</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(系统管理员)</li>
 							<li role="separator" class="divider"></li>
 							<li><a href="#">ROLE_ADMIN</a></li>
 						</ul>
@@ -157,9 +154,6 @@ body {
 									</button>
 									<ul class="dropdown-menu">
 										<li><a href="#">ROLE_FRANCHISEE</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(加盟商)</li>
-										<li><a href="#">ROLE_AGENT</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(代理商)</li>
-										<li><a href="#">ROLE_FRANCHISEMANAGER</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(加盟管理员)</li>
-										<li><a href="#">ROLE_SYSTEMMANAGER</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(系统管理员)</li>
 										<li role="separator" class="divider"></li>
 										<li><a class="disabled" href="#">ROLE_ADMIN</a></li>
 									</ul>
@@ -200,6 +194,7 @@ body {
 				</div>
 				<div class="modal-body">
 					<form id="updateForm" role="form">
+						<input type="hidden" name="id" id="id">
 						<div class="form-group sel">
 							<label for="userName">用户名：</label><input type="text"
 								name="userName" class="form-control" id="userName" readonly="readonly"
@@ -231,9 +226,6 @@ body {
 									</button>
 									<ul class="dropdown-menu">
 										<li><a href="#">ROLE_FRANCHISEE</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(加盟商)</li>
-										<li><a href="#">ROLE_AGENT</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(代理商)</li>
-										<li><a href="#">ROLE_FRANCHISEMANAGER</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(加盟管理员)</li>
-										<li><a href="#">ROLE_SYSTEMMANAGER</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(系统管理员)</li>
 										<li role="separator" class="divider"></li>
 										<li><a class="disabled" href="#">ROLE_ADMIN</a></li>
 									</ul>

@@ -1,24 +1,6 @@
 $(function() {
 	var dataList;
 	
-	window.onload = function() {
-		$.ajax({
-			url : contextPath + "/system/message/findListCount",
-			dataType : 'json',
-			type : 'post',
-			success : function(data, textStatus, jqXHR) {
-				var count = data.t;
-				if (count != null) {
-					$('#mc').text(count);
-				}
-			},
-			error : function(XMLHttpRequest, textStatus, errorThrown, d) {
-				alert(textStatus + '  :  ' + errorThrown + '!');
-			}
-		});
-	};
-	
-	
 	$('#update').click(function() {
 		if($('#detailForm #password').val().length < 5 || $('#detailForm #password').val() == "" 
 				|| $('#detailForm #password').val().length > 10){
